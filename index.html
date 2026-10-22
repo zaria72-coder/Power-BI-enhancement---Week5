@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Power BI</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <style>
+            *{
+            
+                box-sizing:border-box;
+            }
+            
+            body {
+                background-color: rgba(195, 202, 201, 0.724);
+                font-family: Arial;
+                font-size: 120%;
+            }
+
+            .grid-container {
+                display: grid;
+                grid-template-areas:
+                'header'
+                'menu'
+                'main'
+                'usage'
+                'footer';
+                grid-auto-columns:auto;
+                background-color: rgba(192, 200, 202, 0);
+                gap: 10px; 
+                max-width:1100px;
+                max-height: 600px;
+
+            }
+
+            .header {
+                grid-area: header;
+                background-color: rgba(19, 96, 137, 0.829);
+                text-align :Center;
+                color:rgba(255, 249, 249, 0.873);
+                padding: 10px;
+                align-items: left;
+                margin:0;
+        
+                
+            }
+
+            .header img{
+                position:absolute;top:10px; left:10px;
+                max-height: 95px;
+                max-width: 100px;
+        
+            }
+
+            .header>h1{
+                font-size: 32px;
+            }
+
+            .menu{
+                grid-area:menu;
+
+            }
+
+            .menu ul {
+                list-style-type: none;
+                margin:0;
+                padding:0;
+
+            }
+
+            .menu li:hover{
+                background-color:lightgray;
+            }
+
+            .content{
+                grid-area:main;
+            }
+
+            .content >h2{
+                font-size:20px;
+                margin-bottom:5px;
+            }
+
+            .usage{
+                grid-area:usage;
+                border: 1px solid black;
+                background-color: lightgray;
+                padding: 26px;
+                width:105%;
+
+            }
+
+            .usage  >h2 {
+                font-size:26px;
+            }
+
+            .usage li{
+                margin-bottom:15px;
+            }
+
+            .footer {
+            grid-area:footer;
+            background-color:lightgray ;
+            color:#230303;
+            text-align:center;
+            padding: 5px;
+            width:100%;
+            margin-bottom:1px;
+            margin-top:10px;
+            
+            }
+
+            @media (min-width: 600px) {
+                .header{grid-area:1/span 6;}
+                .menu{grid-area:2 /span 1;}
+                .content{grid-area: 2/span 4;}
+                .usage{grid-area:3 /span 6;}
+                .footer{grid-area:1/span -1}
+            
+            }
+
+            @media (min-width: 768px) {
+                .header {grid-area: 1/ span 6;}
+                .menu {grid-area: 1/span 6;}
+                .content {grid-area: 2 / span 4;}
+                .usage{grid-area: 2 /span 1;}
+                .footer{grid-area: 5/span 6;}
+              
+            }
+    
+        </style>
+</head>
+
+<body>
+
+    <div class = "grid-container">
+    <div class = "header"> <h1> Power BI</h1>
+    <img src = "image_PowerBI.png" width = 200 height = 120 alt = "Microsoft Power BI logo">
+
+    </div>
+
+
+    <div class = "usage">
+        <h2>About Power BI</h2>
+        <p>Power BI is a business intelligence platform, which can provide organisations to turn data into reports, supporting data driven decisions. It interests me because I enjoy developing visualisations and dashboard to support my organisation in making effective data driven decisions.
+            
+        <a href="https://www.microsoft.com/en-gb/power-platform/products/power-bi">Click here to learn more about Power BI</a></p>
+        
+        <img src = "dashboard_image.png" alt = "Power BI information illustrated" width ="350" height ="250">
+    
+    </div>
+
+    <div class = "usage">
+        <h3> Benefits of Power BI </h3>
+
+        <ul>
+            <li> Provides organisations with a report comprising data driven insights, enhancing performance.</li>
+            <li> Incorporates with other tools such as Excel, SQL, Azure, Microsoft Fabric and Sharepoint.</li>
+            <li> Enhances data security and governance with its role-based access control and row-level security.</li>
+        </ul>
+
+    <div class = "usage">
+        <h4>Stock Data </h4>
+        <h5> Example of live stock data</h5>
+
+        <p id ="demo"></p>
+
+        <script>
+
+        async function loadJSON() {
+           
+            const response = await fetch("https://api.freeapi.app/api/v1/public/stocks?page=1&limit=2&inc=Symbol%2CName%2CMarketCap%2CCurrentPrice&query=tata");
+            const data = await response.json();
+            
+
+            myDisplayer("Stock1");
+            myDisplayer("");
+            myDisplayer("Symbol:"+ (data.data.data[0].Symbol));
+            myDisplayer("Name:" + (data.data.data[0].Name));
+            myDisplayer("MarketCap:"+ (data.data.data[0].MarketCap));
+            myDisplayer("CurrentPrice:"+(data.data.data[0].CurrentPrice));
+            myDisplayer("");
+            myDisplayer("Stock2");
+            myDisplayer("Symbol:"+ (data.data.data[1].Symbol));
+            myDisplayer("Name:" + (data.data.data[1].Name));
+            myDisplayer("MarketCap:"+ (data.data.data[1].MarketCap));
+            myDisplayer("CurrentPrice:" +(data.data.data[1].CurrentPrice));
+    
+    
+        }
+        loadJSON();
+
+        function myDisplayer(text) {
+            document.getElementById("demo").innerHTML+=text + "<br>";
+        }
+    
+        </script>
+
+
+    </div>
+        <form action "#" method="post"></form>
+    </form>
+    </div>
+
+   <div class = "usage">
+    <h5>Contact form</h5>
+
+    <label for ="fname" >First Name:</label><br>
+    <input type = "text" id="fname" name="fname"required> <br>
+    <label for ="lname"> Last Name: </label><br>
+    <input type = "text" id="lname" name="lname"required> <br>
+    <label for ="emailaddress">Email:</label> <br>
+    <input type = "email" id="emailaddress" name="email" required> <br>
+    <label for ="message"> Message:</label><br>
+    <textarea name="message" id="message" style="width:106%; height:35%;padding:10px; margin: bottom 10px;"></textarea>
+    <br>
+    
+   
+
+
+<button onclick="window.alert('Are you sure you want to leave the page');">
+Alert
+</button>
+
+<script>
+    function myFunction() {
+        document.getElementById("demo").innerHTML ="Provides insights and helps businesses in making data driven decisions";
+    }
+</script>
+
+<button type ="button" onclick ="myFunction ()"> 
+    Click
+</button>
+<p id ="demo"></p>
+<script src ="myScript.js"></script>
+
+<input type ="submit">
+
+<button type = "button" onclick ="document.getElementById('demo').innerHTML = Date()">
+Show Date
+</button>
+
+</form>
+
+</div>
+
+  <div class ="footer">
+    <p>Thank you for visiting my website</p>
+  </div>
+
+</body>
+</html>
+
+
+        
+
+    
+        
